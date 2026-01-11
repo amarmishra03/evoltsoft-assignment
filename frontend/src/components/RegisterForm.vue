@@ -52,9 +52,11 @@
         <div>
           <button
             type="submit"
-            class="flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white hover:bg-green-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
+            :disabled="loading"
+            class="flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white hover:bg-green-400 disabled:opacity-50"
           >
-            Register
+            <span v-if="!loading">Create Account</span>
+            <span v-else class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
           </button>
         </div>
 
@@ -88,23 +90,24 @@ const error = ref("");
 const success = ref("");
 const router = useRouter();
 
+const loading = ref(false);
+
 const register = async () => {
+  loading.value = true;
   try {
     await api.post("/auth/register", {
       name: name.value,
       email: email.value,
-      password: password.value
+      password: password.value,
     });
-
-    success.value = "Registered successfully! Redirecting to login...";
+    success.value = "Registered successfully! Redirecting...";
     error.value = "";
-
-    setTimeout(() => {
-      router.push("/login");
-    }, 1500);
+    setTimeout(() => router.push("/login"), 1500);
   } catch (e) {
     error.value = e.response?.data?.message || "Registration failed";
     success.value = "";
+  } finally {
+    loading.value = false;
   }
 };
 </script>

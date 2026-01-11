@@ -40,9 +40,11 @@
         <div>
           <button
             type="submit"
-            class="flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white hover:bg-green-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
+            :disabled="loading"
+            class="flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white hover:bg-green-400 disabled:opacity-50"
           >
-            Sign in
+            <span v-if="!loading">Sign in</span>
+            <span v-else class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
           </button>
         </div>
 
@@ -71,16 +73,21 @@ const password = ref("");
 const error = ref("");
 const router = useRouter();
 
+const loading = ref(false);
+
 const login = async () => {
+  loading.value = true;
   try {
     const res = await api.post("/auth/login", {
       email: email.value,
-      password: password.value
+      password: password.value,
     });
     localStorage.setItem("token", res.data.token);
     router.push("/dashboard");
   } catch {
     error.value = "Invalid credentials";
+  } finally {
+    loading.value = false;
   }
 };
 </script>
