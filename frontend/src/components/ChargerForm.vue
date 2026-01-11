@@ -65,6 +65,8 @@ const submit = async () => {
 </script>
 
 <style scoped>
+@reference "tailwindcss";
+
 .input {
   @apply bg-gray-700 text-white p-2 rounded outline-none focus:ring-2 focus:ring-green-500;
 }
