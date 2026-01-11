@@ -53,8 +53,13 @@
         v-if="showAddModal"
         class="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
       >
-        <div class="bg-gray-800 p-6 rounded-xl w-full max-w-2xl relative">
-          <button @click="closeAddModal" class="absolute top-3 right-3">✕</button>
+        <div class="bg-gray-800 pt-10 p-6 rounded-xl w-full max-w-2xl relative">
+          <button
+            @click="closeAddModal"
+            class="absolute top-1 right-2 bg-gray-700 hover:bg-gray-600 text-white rounded-full w-8 h-8 flex items-center justify-center"
+          >
+            ✕
+          </button>
           <ChargerForm @refresh="afterAdd" />
         </div>
       </div>
@@ -64,8 +69,13 @@
         v-if="showEditModal"
         class="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
       >
-        <div class="bg-gray-800 p-6 rounded-xl w-full max-w-2xl relative">
-          <button @click="closeEditModal" class="absolute top-3 right-3">✕</button>
+        <div class="bg-gray-800 pt-10 p-6 rounded-xl w-full max-w-2xl relative">
+          <button
+            @click="closeEditModal"
+            class="absolute top-1 right-2 bg-gray-700 hover:bg-gray-600 text-white rounded-full w-8 h-8 flex items-center justify-center"
+          >
+            ✕
+          </button>
           <EditChargerForm :station="editStation" @done="afterEdit" />
         </div>
       </div>
