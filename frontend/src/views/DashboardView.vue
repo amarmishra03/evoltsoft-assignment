@@ -3,29 +3,33 @@
     <div class="max-w-6xl mx-auto">
       <h1 class="text-3xl font-bold text-green-400 mb-6">EV Charging Stations</h1>
 
-      <div class="flex justify-between items-center mb-4">
-        <div class="flex gap-4">
-          <select v-model="status" class="bg-gray-700 text-white p-2 rounded">
+      <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4 gap-4">
+        <!-- Filters -->
+        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+          <select v-model="status" class="bg-gray-700 text-white p-2 rounded w-full sm:w-auto">
             <option value="">All Status</option>
             <option>Active</option>
             <option>Inactive</option>
           </select>
+
           <input
             v-model="connector"
             placeholder="Connector Type"
-            class="bg-gray-700 text-white p-2 rounded"
+            class="bg-gray-700 text-white p-2 rounded w-full sm:w-auto"
           />
+
           <input
             v-model="power"
             type="number"
             placeholder="Min Power (kW)"
-            class="bg-gray-700 text-white p-2 rounded w-36"
+            class="bg-gray-700 text-white p-2 rounded w-full sm:w-36"
           />
         </div>
 
+        <!-- Add Button -->
         <button
           @click="openAddModal"
-          class="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded font-semibold"
+          class="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded font-semibold w-full md:w-auto"
         >
           Add Station
         </button>
